@@ -49,7 +49,7 @@
 
 ### 2. ติดตั้ง Dependencies
 ```bash
-git clone <repository_url>
+git clone https://github.com/kengkla77/Helpdesk_IT.git
 cd helpdesk-system
 npm install
 ```
