@@ -89,14 +89,14 @@ npm run dev
 เปิดบราวเซอร์ไปที่ http://localhost:3000
 
 📂 โครงสร้างโปรเจกต์ (Project Structure)
-Plaintext
 ```
 src/
 ├── app/
 │   ├── (auth)/         # หน้า Login
-│   ├── (dashboard)/    # หน้า Dashboard ของ User
+│   ├── (dashboard)/    # Route Group (ใช้ Layout เดียวกัน)
+│   │   ├── dashboard/  # หน้าแรกของ User (Overview)
+│   │   └── tickets/    # หน้าสร้างและดูรายละเอียด Ticket
 │   ├── admin/          # หน้า Admin Console & Dashboard
-│   ├── tickets/        # หน้าสร้างและดูรายละเอียด Ticket
 │   └── api/            # API Routes (Auth, UploadThing)
 ├── components/         # UI Components (Navbar, Cards, Dropdown)
 ├── lib/                # Utility Functions (Prisma Client, utils)
@@ -118,11 +118,9 @@ npx prisma studio,เปิดหน้าเว็บจัดการฐา�
 ระบบใช้ Role-Based Access Control (RBAC) แบ่งสิทธิ์ดังนี้:
 ```
 USER: แจ้งซ่อม, ดูงานตัวเอง
-```
-```
+
 AGENT: รับงาน, อัปเดตงาน, ดูงานทั้งหมด
-```
-```
+
 ADMIN: จัดการทุกอย่างในระบบ, ดูแล Users, มอบหมายงาน
 ```
 
