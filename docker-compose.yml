@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # 1. ส่วนของ Database (MySQL/MariaDB)
+  db:
+    image: mysql:8.0 # หรือจะใช้ mariadb:latest ก็ได้
+    container_name: my_project_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: helpdesk_db
+    ports:
+      - "3306:3306" # เปิดพอร์ตให้เครื่องเรา connect ได้
+    volumes:
+      - db_data:/var/lib/mysql # **สำคัญ** เพื่อให้ข้อมูลไม่หายเมื่อปิด Docker
+
+  # 2. ส่วนของ phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: my_project_pma
+    restart: always
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8080:80" # เข้าผ่าน browser ด้วย localhost:8080
+    depends_on:
+      - db
+
+# สร้างพื้นที่เก็บข้อมูลถาวร
+volumes:
+  db_data:
